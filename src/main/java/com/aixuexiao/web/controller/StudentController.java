@@ -101,4 +101,15 @@ public class StudentController {
 		mv.addObject("notice","删除成功");
 		return mv;
 	}
+	
+	@RequestMapping(value="/manager/students/json",method=RequestMethod.GET)
+	@ResponseBody
+	public List<Student> returnStudent(String pagenum,Student student){
+		int num = 1;
+		if(null!=pagenum){
+			num = Integer.parseInt(pagenum);
+		}
+		List<Student> list = studentService.listStudent((num-1)*pagesize, pagesize,student);
+		return list;
+	}
 }
