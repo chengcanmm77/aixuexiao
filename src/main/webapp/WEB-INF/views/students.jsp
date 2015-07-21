@@ -44,7 +44,7 @@
 									<i class="icon-search icon-on-right bigger-110"></i>
 								</button>
 							</form>
-							<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+<%-- 							<table id="sample-table-1" class="table table-striped table-bordered table-hover">
 								<thead>
 									<tr>
 										<th width="15%">学生编号</th>
@@ -68,15 +68,29 @@
 									</tr>
 								</c:forEach>
 								</tbody>
-							</table>
+							</table> --%>
 							
-					 		<div class="dataTables_paginate paging_bootstrap pagination">
+<%-- 					 		<div class="dataTables_paginate paging_bootstrap pagination">
 							  <button class="btn btn-success btn-mini" onclick="location.href='<%=request.getContextPath() %>/manager/students?pagenum=${pagenum-1}'" <c:if test="${pagenum <= 1}">disabled="disabled"</c:if>    >&laquo;</button>
 							  <button class="btn btn-success btn-mini" disabled="disabled">第 ${pagenum} 页</button>
 							  <button class="btn btn-success btn-mini" onclick="location.href='<%=request.getContextPath() %>/manager/students?pagenum=${pagenum+1}'" <c:if test="${length < 8}">disabled="disabled"</c:if> >&raquo;</button>
-					 		</div>
-							 
-							<!--PAGE CONTENT ENDS-->
+					 		</div> --%>
+						<div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+							<table data-order='[[ 1, "asc" ]]' data-page-length='25'
+								id="table_id"
+								class="table table-striped table-bordered dataTable">
+								<thead class="thead sorting">
+									<tr>
+										<th>学生编号</th>
+										<th>学生姓名</th>
+										<th>所属班级</th>
+										<th>备注</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+						<!--PAGE CONTENT ENDS-->
 					</div><!--/.span-->
 				</div><!--/.row-fluid-->
 			</div><!--/.page-content-->
@@ -84,6 +98,38 @@
 	</div><!--/.main-container-->
 
 		<%@include file="/WEB-INF/views/common/js.jsp" %>
+		<script>
+		$(document).ready( 
+				function () {
+					$('#table_id').DataTable(
+						{
+							ajax: {
+								url:"/aixuexiao/manager/students/json",
+							},
+							columns: 
+							[
+								{ data: 'id' },
+								{ data: 'classid' },
+								{ data: 'name' },
+								{ data: 'remark' },
+								{ data: 'id'}
+							],
+							columnDefs:[
+							    {
+							    	targets: 4,
+									"render" : function (data,type,row,meta){
+									 	var table = $('#table_id').DataTable();
+									 	return data;
+									}
+							    }
+							
+							]
+							
+						}
+					);
+				} 
+			);
+		</script>
 		
 	</body>
 </html>

@@ -17,4 +17,5 @@
 <!--ace scripts-->
 <script src="<%=request.getContextPath()%>/assets/js/ace-elements.min.js"></script>
 <script src="<%=request.getContextPath()%>/assets/js/ace.min.js"></script>
+<script type="text/javascript" charset="utf8" src="<%=request.getContextPath()%>/assets/js/jquery.dataTables.min.js"></script>
 <!--inline scripts related to this page-->

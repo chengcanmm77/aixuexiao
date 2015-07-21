@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/ace.min.css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/ace-responsive.min.css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/ace-skins.min.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/assets/css/jquery.dataTables.css">
 <!--[if lte IE 8]>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/ace-ie.min.css" />
 <![endif]-->
