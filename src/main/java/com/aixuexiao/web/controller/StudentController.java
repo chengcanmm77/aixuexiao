@@ -35,18 +35,18 @@ public class StudentController {
 	public ModelAndView listStudent(String pagenum,Student student){
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("students");
-//		mv.addObject("sidebar","students");
+		mv.addObject("sidebar","students");
 //		int num = 1;
 //		if(null!=pagenum){
 //			num = Integer.parseInt(pagenum);
 //		}
 //		List<Student> list = studentService.listStudent((num-1)*pagesize, pagesize,student);
-//		List<Classes> clslist = studentService.findAllClasses();
+		List<Classes> clslist = studentService.findAllClasses();
 //		mv.addObject("studentList", list);
-//		mv.addObject("clsList", clslist);
+		mv.addObject("clsList", clslist);
 //		mv.addObject("length", list.size());
 //		mv.addObject("pagenum", num);
-//		mv.addObject("student", student);
+		mv.addObject("student", student);
 		return mv;
 	}
 
@@ -104,16 +104,5 @@ public class StudentController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/manager/students/json",method=RequestMethod.GET)
-	@ResponseBody
-	public Map<String,List<Student>> returnStudent(String pagenum,Student student){
-		int num = 1;
-		if(null!=pagenum){
-			num = Integer.parseInt(pagenum);
-		}
-		List<Student> list = studentService.listStudent((num-1)*pagesize, pagesize,student);
-		Map<String,List<Student>> resultMap = new HashMap<String, List<Student>>();
-		resultMap.put("data", list);
-		return resultMap;
-	}
+
 }

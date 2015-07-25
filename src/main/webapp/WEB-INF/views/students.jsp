@@ -7,6 +7,11 @@
 		<meta name="description" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<%@include file="/WEB-INF/views/common/css.jsp" %>
+		<style type="text/css">
+			.dataTables_filter,.dataTables_length {
+				display: none; 
+			}
+		</style>
 	</head>
 
 	<body>
@@ -29,8 +34,27 @@
 					</div> 
 					<div class="row-fluid">
 						<div class="span12">
+						<form class="form-inline" method="get" action="<%=request.getContextPath() %>/manager/students">
+								<input type="hidden" name="pagenum" value="${pagenum}">
+								&nbsp;&nbsp;姓名：<input type="text" id="name" value="${student.name}"  class="input-medium search-query">&nbsp;&nbsp;&nbsp;&nbsp;
+								<select id="classid">
+									<option value="0">选择班级</option>
+									<c:forEach items="${clsList}"  var="cls"  >
+										<option <c:if test="${student.classid == cls.id}">selected="selected"</c:if> value="${cls.id}">${cls.name}</option>
+									</c:forEach>
+								</select>&nbsp;&nbsp;
+								<button id="btn_search" type="button" class="btn btn-purple btn-small">
+									查找
+									<i class="icon-search icon-on-right bigger-110"></i>
+								</button>
+								<button id="btn_refresh" type="button" class="btn btn-primary btn-small">
+									重置
+									<i class="icon-refresh icon-on-right bigger-110"></i>
+								</button>
+							</form>
+						
 							<!--PAGE CONTENT BEGINS-->
-							<form class="form-inline" method="get" action="<%=request.getContextPath() %>/manager/students">
+							<%-- <form class="form-inline" method="get" action="<%=request.getContextPath() %>/manager/students">
 								<input type="hidden" name="pagenum" value="${pagenum}">
 								&nbsp;&nbsp;姓名：<input type="text" name="name" value="${student.name}"  class="input-medium search-query">&nbsp;&nbsp;&nbsp;&nbsp;
 								<select name="classid">
@@ -43,7 +67,7 @@
 									查找
 									<i class="icon-search icon-on-right bigger-110"></i>
 								</button>
-							</form>
+							</form> --%>
 <%-- 							<table id="sample-table-1" class="table table-striped table-bordered table-hover">
 								<thead>
 									<tr>
@@ -75,10 +99,14 @@
 							  <button class="btn btn-success btn-mini" disabled="disabled">第 ${pagenum} 页</button>
 							  <button class="btn btn-success btn-mini" onclick="location.href='<%=request.getContextPath() %>/manager/students?pagenum=${pagenum+1}'" <c:if test="${length < 8}">disabled="disabled"</c:if> >&raquo;</button>
 					 		</div> --%>
-						<div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-							<table data-order='[[ 1, "asc" ]]' data-page-length='25'
+						
+						<!--PAGE CONTENT ENDS-->
+					</div><!--/.span-->
+				</div><!--/.row-fluid-->
+				<div class="form-inline no-footer">
+							<table 
 								id="table_id"
-								class="table table-striped table-bordered dataTable">
+								class="table table-bordered dataTable hover">
 								<thead class="thead sorting">
 									<tr>
 										<th>学生编号</th>
@@ -90,45 +118,69 @@
 								</thead>
 							</table>
 						</div>
-						<!--PAGE CONTENT ENDS-->
-					</div><!--/.span-->
-				</div><!--/.row-fluid-->
 			</div><!--/.page-content-->
 		</div><!--/.main-content-->
 	</div><!--/.main-container-->
 
 		<%@include file="/WEB-INF/views/common/js.jsp" %>
 		<script>
-		$(document).ready( 
-				function () {
-					$('#table_id').DataTable(
+		var table = $('#table_id').DataTable(
+				{
+					ajax: {
+						url:"/aixuexiao/manager/students/json",
+					},
+					lengthMenu:[[8,-1],[8,"ALL"]],
+					columns: 
+					[
+						{ data: 'id' },
+						{ data: 'name' },
+						{ data: 'classid'},
+						{ data: 'remark' },
+						{data:'id'}
+					],
+					columnDefs:[
 						{
-							ajax: {
-								url:"/aixuexiao/manager/students/json",
-							},
-							columns: 
-							[
-								{ data: 'id' },
-								{ data: 'classid' },
-								{ data: 'name' },
-								{ data: 'remark' },
-								{ data: 'id'}
-							],
-							columnDefs:[
-							    {
-							    	targets: 4,
-									"render" : function (data,type,row,meta){
-									 	var table = $('#table_id').DataTable();
-									 	return data;
-									}
-							    }
-							
-							]
-							
+							targets: 4,
+							render: function(data,type,row,meta){
+								var tmp = document.createElement("div");
+								var btn=$('<button/>').addClass("btn btn-primary btn-mini");	
+								var i=$('<i/>').addClass("icon-comment");
+								$(btn).css("margin-right","2px");
+								$(btn).append(i);
+								$(btn).attr({
+									onclick:"location.href='<%=request.getContextPath() %>/manager/leavemessage?studentid="+data + "'"
+								});
+								$(btn).append("微留言");
+								
+								var btn1=$('<button/>').addClass("btn btn-primary btn-mini");	
+								var i1=$('<i/>').addClass("icon-file");
+								$(btn1).css("margin-right","2px");
+								$(btn1).append(i1);
+								$(btn1).attr({
+									onclick:"location.href='<%=request.getContextPath() %>/manager/examdetail?studentid="+data + "'"
+								});
+								$(btn1).append("考试情况");
+								
+								$(tmp).append(btn);
+								$(tmp).append(btn1);
+								return $(tmp).html();
+							}
 						}
-					);
-				} 
+					]
+				}
 			);
+		$('#btn_refresh').click(function(){
+			table.columns().flatten().each(function(i){table.column(i).search('')});
+			table.draw();
+		});
+		$('#btn_search').click(function(){
+			table.column(1).search($('#name').val());
+			if($('#classid').val()==0)
+				table.column(2).search('');
+			else
+				table.column(2).search($('#classid').val());
+			table.draw();
+		});
 		</script>
 		
 	</body>

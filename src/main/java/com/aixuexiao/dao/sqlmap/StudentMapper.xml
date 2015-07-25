@@ -15,7 +15,7 @@
 	   where classid = #{classid}
 	</select>  
 	
-	<select id="selectStudent"  parameterType="java.util.HashMap"   resultMap="studentMap"  >
+<!-- 	<select id="selectStudent"  parameterType="java.util.HashMap"   resultMap="studentMap"  >
 	   select id,classid,name,remark 
 	   from student 
 		<where>
@@ -24,6 +24,9 @@
 		</where>	   
 	   order by id  
 	   limit #{start},#{size}
+	</select> -->
+		<select id="selectStudent"  parameterType="java.util.HashMap"   resultMap="studentMap"  >
+	   select id,classid,name,remark from student order by id  
 	</select>
 	
 	<update id="updateStudent"  parameterType="com.aixuexiao.model.Student">

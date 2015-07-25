@@ -28,3 +28,6 @@ replyMessage（对应URL:/weixin POST）方法则是回复方法。
 
 zhiyun.cloud@gmail.com
 @智云同学
+
+v0.1
+1.学生信息表格采用ajax加载，并实现分页，查找和表内添加控件功能。

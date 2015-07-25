@@ -83,7 +83,8 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 	</bean>
     
     <bean id="writerSqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="writerSqlSessionFactory" />
+		<constructor-arg index="0" ref=
+		"writerSqlSessionFactory" />
 	</bean>
     
      <!-- 事务控制 （主库）-->
