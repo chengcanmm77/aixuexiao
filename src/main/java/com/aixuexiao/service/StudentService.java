@@ -91,5 +91,8 @@ public class StudentService {
 		return studentMessageDao.findStudentMessageByStudentId(studentid, limit);
 	}
 	
+	public void addStudent(Student student){
+		studentDao.addStudent(student);
+	}
 	
 }

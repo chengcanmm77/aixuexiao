@@ -31,3 +31,4 @@ zhiyun.cloud@gmail.com
 
 v0.1
 1.学生信息表格采用ajax加载，并实现分页，查找和表内添加控件功能。
+2.添加学生modal框，通过ajax发送json实现添加学生功能

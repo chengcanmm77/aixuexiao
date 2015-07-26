@@ -32,7 +32,7 @@
 	   </property>  
 	</bean>	
     	
-      <context:component-scan base-package="com.aixuexiao.web.controller,com.aixuexiao.web.json"/>
+      <context:component-scan base-package="com.aixuexiao.web.controller,lky.web.Controller"/>
       <mvc:annotation-driven />
       
       <mvc:interceptors>
