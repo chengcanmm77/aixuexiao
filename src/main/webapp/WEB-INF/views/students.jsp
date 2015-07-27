@@ -97,17 +97,20 @@
 										value="${cls.id}">${cls.name}</option>
 								</c:forEach>
 							</select>&nbsp;&nbsp;
-							<button id="btn_search" type="button"
-								class="btn btn-purple btn-small">
+							<button id="btn_search" type="button" class="btn btn-purple btn-small">
 								查找 <i class="icon-search icon-on-right bigger-110"></i>
 							</button>
-							<button id="btn_refresh" type="button"
-								class="btn btn-primary btn-small">
+							<button id="btn_refresh" type="button" class="btn btn-primary btn-small">
 								重置 <i class="icon-refresh icon-on-right bigger-110"></i>
 							</button>
-							<button id="btn_plus" type="button"
-								class="btn btn-primary btn-small" data-title="添加学生">
+							<button id="btn_plus" type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#studentModal" data-title="添加学生" data-type="add" data-url="/aixuexiao/manager/students/add">
 								添加 <i class="icon-plus icon-on-right bigger-110"></i>
+							</button>
+							<button id="btn_edit" type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#studentModal" data-title="更新学生" data-type="update" data-url="/aixuexiao/manager/students/update">
+								更新<i class="icon-edit icon-on-right bigger-110"></i>
+							</button>
+							<button id="btn_delete" type="button" class="btn btn-primary btn-small" data-type="delete" data-url="/aixuexiao/manager/students/delete">
+								删除<i class="icon-trash icon-on-right bigger-110"></i>
 							</button>
 						</form>
 
@@ -198,7 +201,7 @@
 						{ data: 'name' },
 						{ data: 'classid'},
 						{ data: 'remark' },
-						{data:'id'}
+						{ data: 'id'}
 					],
 					columnDefs:[
 						{
@@ -229,6 +232,14 @@
 								}
 							} ]
 						});
+		$('#table_id tbody').on('click','tr',function(){
+			if($(this).hasClass('selected')){
+				$(this).removeClass('selected');
+			}else{
+				table.$('tr.selected').removeClass('selected');
+				$(this).addClass('selected');
+			}
+		});
 		$('#btn_refresh').click(function() {
 			table.columns().flatten().each(function(i) {
 				table.column(i).search('')
@@ -243,33 +254,67 @@
 				table.column(2).search($('#classid').val());
 			table.draw();
 		});
-		$('#btn_plus').click(function() {
-			var title = $('#btn_plus').data('title');
+		$('#studentModal').on('show.bs.modal', function (event) {
+			 // Button that triggered the modal  
+			var button = $(event.relatedTarget);
+			  var url = button.data('url');
+			  var type = button.data('type');
+			  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+			  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+			var title = button.data('title');
 			$('#studentModalLabel').text(title);
-			$('#btn_save').click(function(){
-				var student = {
-					id:$('#id_input').val(),
-					name:$('#name_input').val(),
-					classid:$('#classid_select').val(),
-					remark:$('#remark_input').val()
-				};
-				$.ajax({
-					type:"POST",
-					url:"/aixuexiao/manager/students/add",
-					contentType:"application/json;charset=utf-8",
-					data:JSON.stringify(student),
-					success:function(message){
-						$('#studentModal').modal('hide');
-						table.ajax.reload();
-					},
-					error:function(message){
-						$('#studentModal').modal('hide');
-						alert(message);
-					}
-				});
+			if(type=='update'){
+				if(!table.$('tr.selected').hasClass('selected'))return;
+				var model = table.row('.selected').data();
+				$('#id_input').val(model.id);
+				$('#name_input').val(model.name);
+				$('#classid_select').val(model.classid);
+				$('#remark_input').val(model.remark);
+			}
+			
+			  $('#studentModal').attr({
+				  "data-url":url
+			  });
 			});
-			$('#studentModal').modal('show');
+		$('#btn_save').click(function(){
+			var student = {
+				id:$('#id_input').val(),
+				name:$('#name_input').val(),
+				classid:$('#classid_select').val(),
+				remark:$('#remark_input').val()
+			};
+			$.ajax({
+				type:"POST",
+				url:$('#studentModal').data('url'),
+				contentType:"application/json;charset=utf-8",
+				data:JSON.stringify(student),
+				success:function(message){
+					$('#studentModal').modal('hide');
+					table.ajax.reload();
+				},
+				error:function(message){
+					$('#studentModal').modal('hide');
+					alert(message);
+				}
+			});
 		});
+		$('#btn_delete').click(function(){
+			if(!table.$('tr.selected').hasClass('selected'))return;
+			var model = table.row('.selected').data();
+			$.ajax({
+				type:"POST",
+				url:$('#btn_delete').data('url'),
+				data:"id="+model.id,
+				success:function(message){
+					table.ajax.reload();
+				},
+				error:function(message){
+					alert(message);
+				}
+			});
+		});
+
+
 	</script>
 
 </body>

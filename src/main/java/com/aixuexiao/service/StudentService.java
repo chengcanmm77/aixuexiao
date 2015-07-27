@@ -95,4 +95,10 @@ public class StudentService {
 		studentDao.addStudent(student);
 	}
 	
+	public void updateStudent(Student student){
+		studentDao.updateStudent(student);
+	}
+	public void deleteStudentByid(int id){
+		studentDao.deleteStudentById(id);
+	}
 }

@@ -11,14 +11,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.aixuexiao.model.Student;
 import com.aixuexiao.service.StudentService;
 
-@Controller("lky_student")
-public class StudentController {
+@Controller
+public class StudentControllerNew {
 	public static final int pagesize = 8;
 	
 	@Resource(name="studentService")
@@ -39,5 +40,16 @@ public class StudentController {
 	public void InsertStudent(@RequestBody Student student) {
 		studentService.addStudent(student);
 	}
+	@RequestMapping(value="/manager/students/update",method=RequestMethod.POST)
+	@ResponseStatus(value = HttpStatus.OK)
+	public void updateStudent(@RequestBody Student student) {
+		studentService.updateStudent(student);
+	}
 	
+	@RequestMapping(value="/manager/students/delete",method=RequestMethod.POST)
+	@ResponseStatus(value = HttpStatus.OK)
+	public void deleteStudent(@RequestParam Integer id) throws Exception {
+		if(id==null)throw new Exception("id不能为空");
+		studentService.deleteStudentByid(id);
+	}
 }
