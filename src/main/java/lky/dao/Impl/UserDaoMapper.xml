@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lky.dao.Impl">
+    
+	<insert id="createUser" parameterType="lky.entity.User">
+		insert into sys_users (username,password,salt,locked)
+		 values(#{username},#{password},#{salt},#{locked});
+	</insert>
+	
+	<delete id="deleteUser"  parameterType="long" >
+	    delete from sys_users where id = #{id}
+	</delete>
+	
+	<update id="updateUser" parameterType="lky.entity.User">
+		update sys_users set username=#{username},password=#{password},email=#{email},salt=#{salt},locked=#{locked} where id=#{id}
+	</update>
+	
+	<insert id="singleUserCorrelation" parameterType="map">
+		insert into sys_users_roles(user_id,role_id) values(#{user_id},#{role_id})
+	</insert>
+	<insert id="singleUserUnCorrelation" parameterType="map">
+		delete from sys_users_roles(user_id,role_id) where role_id=#{role_id} and user_id=#{user_id}
+	</insert>
+	
+	<select id="findOne" resultType="lky.entity.User">
+		select id,username,password,salt,locked form sys_users where id=#{id}
+	</select>
+	
+	<select id="findByUsername" resultType="lky.entity.User">
+		select id, username, password, salt, locked from sys_users where username=#{username}
+	</select>
+	
+	<select id="findRoles">
+		select role from sys_users u, sys_roles r,sys_users_roles ur where u.username=#{username} and u.id=ur.user_id and r.id=ur.role_id
+	</select>
+	
+	<select id="findPermissions">
+		select permission from sys_users u, sys_roles r, sys_permissions p, sys_users_roles ur, sys_roles_permissions rp where u.username=#{username} and u.id=ur.user_id and r.id=ur.role_id and r.id=rp.role_id and p.id=rp.permission_id
+	</select>
+	
+</mapper>
