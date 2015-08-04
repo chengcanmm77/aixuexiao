@@ -33,6 +33,7 @@
    		 <typeAlias alias="ExamMark"  type="com.aixuexiao.model.ExamMark" />
    		 <typeAlias alias="StudentMessage"  type="com.aixuexiao.model.StudentMessage" />
    		 <typeAlias alias="ClassesNews"  type="com.aixuexiao.model.ClassesNews" />
+   		 <typeAlias alias="Permission" type="lky.entity.Permission"/>
 	</typeAliases>
     <mappers>
     	<mapper resource="com/aixuexiao/dao/sqlmap/ReplyMapper.xml"/>
@@ -42,5 +43,8 @@
     	<mapper resource="com/aixuexiao/dao/sqlmap/StudentMessageMapper.xml"/>
     	<mapper resource="com/aixuexiao/dao/sqlmap/ClassesNewsMapper.xml"/>
     	<mapper resource="com/aixuexiao/dao/sqlmap/ClassesMapper.xml"/>
+    	<mapper resource="lky/dao/Impl/PermissionDaoMapper.xml"/>
+    	<mapper resource="lky/dao/Impl/UserDaoMapper.xml"/>
+    	<mapper resource="lky/dao/Impl/RolesDaoMapper.xml"/>
     </mappers>
 </configuration>

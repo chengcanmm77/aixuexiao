@@ -24,7 +24,7 @@ public class LoginController {
 			error="用户名/密码错误";
 		}else if (IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
 			error="用户名/密码错误";
-		}else if(exceptionClassName!=null){
+		}else {
 			error="其它错误:"+exceptionClassName;
 		}
 		model.addAttribute("error", error);
