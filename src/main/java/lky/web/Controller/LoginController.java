@@ -16,18 +16,31 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
-	@RequestMapping(value="/login")
-	public String showLoginForm(HttpServletRequest req, Model model){
+	@RequestMapping(value="/")
+	public String index(){
+		return "redirect:/manager/students";
+	}
+	@RequestMapping(value="/login",method=RequestMethod.GET)
+	public String showLoginForm(){
+		return "login";
+	}
+	
+	@RequestMapping(value="/login",method=RequestMethod.POST)
+	public String login(HttpServletRequest req, Model model){
 		String exceptionClassName = (String)req.getAttribute("shiroLoginFailure");
 		String error = null;
 		if (UnknownAccountException.class.getName().equals(exceptionClassName)) {
 			error="用户名/密码错误";
 		}else if (IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
 			error="用户名/密码错误";
-		}else {
+		}else if(exceptionClassName!=null){
 			error="其它错误:"+exceptionClassName;
 		}
-		model.addAttribute("error", error);
-		return "login";
+		if(error==null){
+			return "login";
+		}else {
+			return "redirect:/manager/students";
+		}
+		
 	}
 }

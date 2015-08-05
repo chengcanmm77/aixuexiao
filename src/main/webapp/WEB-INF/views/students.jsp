@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="GBK"%>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,13 +8,13 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!--basic styles-->
-<link href="/aixuexiao/assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-<link href="/aixuexiao/assets/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" />
-<link href="/aixuexiao/assets/bower_components/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css" rel="stylesheet" />
-<link rel="stylesheet" href="/aixuexiao/assets/bower_components/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="/aixuexiao/assets/bower_components/metisMenu/dist/metisMenu.min.css">
+<link href="<%=request.getContextPath()%>/assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/assets/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/assets/bower_components/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css" rel="stylesheet" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/bower_components/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/bower_components/metisMenu/dist/metisMenu.min.css">
 
-<link rel="stylesheet" type="text/css" href="bower_components/datatables/media/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/assets/bower_components/datatables/media/css/jquery.dataTables.css">
 <style type="text/css">
 .dataTables_filter,.dataTables_length {
 	display: none;
@@ -190,7 +188,7 @@
 				<!--/.row-fluid-->
 				<div class="form-inline no-footer">
 					<table id="table_id" class="table table-bordered dataTable hover">
-						<thead class="thead sorting">
+						<thead>
 							<tr>
 								<th>学生编号</th>
 								<th>学生姓名</th>
@@ -224,9 +222,9 @@
 <!--page specific plugin scripts-->
 <!--ace scripts-->
 
-<script type="text/javascript" charset="utf8" src="/aixuexiao/assets/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" charset="utf8" src="/aixuexiao/assets/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-<script type="text/javascript" charset="utf8" src="/aixuexiao/assets/bower_components/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
+<script type="text/javascript" charset="utf8" src="<%=request.getContextPath()%>/assets/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="<%=request.getContextPath()%>/assets/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+<script type="text/javascript" charset="utf8" src="<%=request.getContextPath()%>/assets/bower_components/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
 <!--inline scripts related to this page-->
 	<script>
 		$(document).ready(function(){
