@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import lky.entity.User;
 import lky.service.UserService;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -17,6 +18,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 
 public class UserRealm extends AuthorizingRealm{
@@ -29,6 +31,7 @@ public class UserRealm extends AuthorizingRealm{
 		String username = (String)principals.getPrimaryPrincipal();
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 		authorizationInfo.setRoles(new HashSet<String>(userService.findRoles(username)));
+		authorizationInfo.setStringPermissions(new HashSet<String>(userService.findPermission(username)));
 		return authorizationInfo;
 	}
 
