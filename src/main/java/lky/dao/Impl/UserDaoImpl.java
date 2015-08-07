@@ -5,23 +5,29 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import lky.dao.UserDao;
 import lky.entity.User;
 
 import com.aixuexiao.dao.BaseDao;
 @Component("userDao")
+
 public class UserDaoImpl extends BaseDao implements UserDao {
 
 	@Override
+	//@Transactional(propagation=Propagation.REQUIRES_NEW)
+	//@Transactional
 	public void createUser(User user) {
 		this.writerSqlSession.insert("lky.dao.Impl.createUser",user);
-		
 	}
-
 	@Override
+	//@Transactional(propagation=Propagation.REQUIRES_NEW)
+	//@Transactional
 	public void updateUser(User user) {
 		this.writerSqlSession.insert("lky.dao.Impl.updateUser",user);
+		throw new UnsupportedOperationException("回滚");
 	}
 
 	@Override

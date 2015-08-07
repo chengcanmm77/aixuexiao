@@ -13,15 +13,24 @@ public class UserTest {
 	private static UserService service;
 	@Before
 	public void init(){
-		ctx = new FileSystemXmlApplicationContext("classpath:spring.xml");
+		ctx = new FileSystemXmlApplicationContext("classpath:test-spring-transaction.xml");
 	    service = (UserService)ctx.getBean("userService");
 	}
 	@Test
 	public void create(){
 		User user1 = new User();
-		user1.setUsername("admin");
+		user1.setUsername("test");
 		user1.setPassword("123");
 		user1.setLocked(false);
 		service.createUser(user1);
+	}
+	public static void main(String[] args) {
+		ctx = new FileSystemXmlApplicationContext("classpath:test-spring-transaction.xml");
+	    service = (UserService)ctx.getBean("userService");
+		User user1 = new User();
+		user1.setUsername("op");
+		user1.setPassword("123");
+		user1.setLocked(false);
+		service.createAndUpdate(user1);
 	}
 }

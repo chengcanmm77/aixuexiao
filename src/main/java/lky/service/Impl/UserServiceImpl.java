@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import lky.dao.UserDao;
 import lky.entity.User;
@@ -18,10 +20,9 @@ public class UserServiceImpl implements UserService{
 	private UserDao userDao;
 
 	@Override
-	public User createUser(User user) {
+	public void createUser(User user) {
 		PasswordHelper.encryptPassword(user);
 		userDao.createUser(user);
-		return userDao.findOne(user.getId());
 	}
 
 	@Override
@@ -56,6 +57,16 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<String> findPermission(String username) {
 		return userDao.findPermissions(username);
+	}
+
+	@Override
+	@Transactional
+	public void createAndUpdate(User user) {
+		createUser(user);
+		User user1 = findByUsername("test");
+		user1.setLocked(true);
+		userDao.updateUser(user1);
+		
 	}
 
 }

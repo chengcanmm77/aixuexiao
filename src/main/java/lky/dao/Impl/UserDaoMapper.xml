@@ -13,7 +13,7 @@
 	</delete>
 	
 	<update id="updateUser" parameterType="lky.entity.User">
-		update sys_users set username=#{username},password=#{password},email=#{email},salt=#{salt},locked=#{locked} where id=#{id}
+		update sys_users set username=#{username},password=#{password},salt=#{salt},locked=#{locked} where id=#{id}
 	</update>
 	
 	<insert id="singleUserCorrelation" parameterType="map">
