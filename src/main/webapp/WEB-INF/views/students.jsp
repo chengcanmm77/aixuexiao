@@ -99,19 +99,19 @@
 							<div class="form-group">
 								<lable for="id_input" class="col-sm-2 control-label">学生编号</lable>
 								<div class="col-sm-10">
-									<input type="text" name="" id="id_input">
+									<input type="text" class="form-control" name="" id="id_input">
 								</div>
 							</div>
 							<div class="form-group">
 								<lable for="name_input" class="col-sm-2 control-label">学生姓名</lable>
 								<div class="col-sm-10">
-									<input type="text" name="" id="name_input">
+									<input type="text" class="form-control" name="" id="name_input">
 								</div>
 							</div>
-							<div class="form-group">
+							<div class="form-group ">
 								<lable for="classid_select" class="col-sm-2 control-label">所属班级</lable>
 								<div class="col-sm-10">
-									<select id="classid_select">
+									<select id="classid_select" class="form-control">
 										<option value="0">选择班级</option>
 										
 										<option value="301">三年级一班</option>
@@ -125,7 +125,7 @@
 							<div class="form-group">
 								<lable for="remark_input" class="col-sm-2 control-label">备注</lable>
 								<div class="col-sm-10">
-									<input type="text" name="" id="remark_input">
+									<input type="text" name="" id="remark_input" class="form-control">
 								</div>
 							</div>
 						</form>
@@ -307,8 +307,7 @@
 				var title = button.data('title');
 				$('#studentModalLabel').text(title);
 				if(type=='update'){
-					if(!table.$('tr.selected').hasClass('selected'))return;
-					var model = table.row('.selected').data();
+					var model = table.row('.active').data();
 					$('#id_input').val(model.id);
 					$('#name_input').val(model.name);
 					$('#classid_select').val(model.classid);
@@ -342,8 +341,7 @@
 				});
 			});
 			$('#btn_delete').click(function(){
-				if(!table.$('tr.selected').hasClass('selected'))return;
-				var model = table.row('.selected').data();
+				var model = table.row('.active').data();
 				$.ajax({
 					type:"POST",
 					url:$('#btn_delete').data('url'),
