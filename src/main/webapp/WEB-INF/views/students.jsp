@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/bower_components/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/bower_components/metisMenu/dist/metisMenu.min.css">
 
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/assets/bower_components/datatables/media/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/assets/bower_components/datatables/media/css/dataTables.Bootstrap.css">
 <style type="text/css">
 .dataTables_filter,.dataTables_length {
 	display: none;
@@ -186,8 +186,8 @@
 					<!--/.span-->
 				</div>
 				<!--/.row-fluid-->
-				<div class="form-inline no-footer">
-					<table id="table_id" class="table table-bordered dataTable hover">
+				<div class="dataTables_wrapper form-inline no-footer">
+					<table id="table_id" class="table table-striped table-bordered dataTable hover">
 						<thead>
 							<tr>
 								<th>Ñ§Éú±àºÅ</th>
@@ -223,6 +223,7 @@
 <!--ace scripts-->
 
 <script type="text/javascript" charset="utf8" src="<%=request.getContextPath()%>/assets/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="<%=request.getContextPath()%>/assets/bower_components/datatables/media/js/dataTables.Bootstrap.js"></script>
 <script type="text/javascript" charset="utf8" src="<%=request.getContextPath()%>/assets/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 <script type="text/javascript" charset="utf8" src="<%=request.getContextPath()%>/assets/bower_components/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
 <!--inline scripts related to this page-->
@@ -272,11 +273,11 @@
 								} ]
 							});
 			$('#table_id tbody').on('click','tr',function(){
-				if($(this).hasClass('selected')){
-					$(this).removeClass('selected');
+				if($(this).hasClass('active')){
+					$(this).removeClass('active');
 				}else{
-					table.$('tr.selected').removeClass('selected');
-					$(this).addClass('selected');
+					table.$('tr.active').removeClass('active');
+					$(this).addClass('active');
 				}
 			});
 			$('#btn_undo').click(function() {

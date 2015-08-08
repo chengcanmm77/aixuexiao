@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,8 +30,9 @@ public class ClassesController {
 	private ClassesService classesService;
 	
 	
-	@RequestMapping(value="/manager/classes",method=RequestMethod.GET)
-	public ModelAndView listStudent(String pagenum,Classes classes){
+	@RequestMapping(value="/manager/classes/",method=RequestMethod.GET)
+	public ModelAndView listStudent(
+			String pagenum,Classes classes){
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("classes");
 		mv.addObject("sidebar","classes");
@@ -118,6 +120,7 @@ public class ClassesController {
 		mv.addObject("notice","删除动态成功");
 		return mv;
 	}
+	
 	
 	
 	@RequestMapping(value="/manager/addstudent",method=RequestMethod.POST)

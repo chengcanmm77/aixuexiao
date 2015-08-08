@@ -37,7 +37,7 @@ public class StudentControllerNew {
 	}
 	@RequestMapping(value="/manager/students/add",method=RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
-	public void InsertStudent(@RequestBody Student student) {
+	public void InsertStudent(  Student student) {
 		studentService.addStudent(student);
 	}
 	@RequestMapping(value="/manager/students/update",method=RequestMethod.POST)

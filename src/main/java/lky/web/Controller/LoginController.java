@@ -37,9 +37,9 @@ public class LoginController {
 			error="其它错误:"+exceptionClassName;
 		}
 		if(error==null){
-			return "login";
-		}else {
 			return "redirect:/manager/students";
+		}else {
+			return "login";
 		}
 		
 	}
