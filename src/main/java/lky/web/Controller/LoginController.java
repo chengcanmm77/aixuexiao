@@ -2,8 +2,10 @@ package lky.web.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.subject.Subject;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,5 +44,11 @@ public class LoginController {
 			return "login";
 		}
 		
+	}
+	@RequestMapping(value="/logout")
+	public String logout(){
+		Subject subject = SecurityUtils.getSubject();
+		subject.logout();
+		return "login";
 	}
 }

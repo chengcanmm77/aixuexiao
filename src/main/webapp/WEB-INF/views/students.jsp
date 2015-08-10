@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="GBK"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Ñ§ÉúĞÅÏ¢</title>
+<title>å­¦ç”Ÿä¿¡æ¯</title>
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!--basic styles-->
@@ -23,52 +22,66 @@
 </head>
 
 <body>
+<%@include file="/WEB-INF/views/modal/studentModal.jsp" %>
 <div id="wrapper">
-<nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0">
+	<nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0">
 	<div class="navbar-header">
 			<a href="/aixuexiao/" class="navbar-brand">
 				<i class="fa fa-briefcase"></i>
-				&nbsp;°®Ñ§Ğ£ 
+				&nbsp;çˆ±å­¦æ ¡ 
 			</a><!--/.brand-->
 		
 	</div><!--/.navbar-inner-->
+	<ul class="nav navbar-top-links navbar-right">
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				<i class="fa fa-gear fa-fw"></i>
+				<i class="fa fa-caret-down"></i>
+			</a>
+			<ul class="dropdown-menu dropdown-user">
+				<li><a href="#"><i class="fa fa-user fa-fw">ç”¨æˆ·ä¿¡æ¯</i></a></li>
+				<li class="divider"></li>
+				<li><a href="<%=request.getContextPath()%>/logout"><i class="fa fa-sign-out fa-fw">é€€å‡ºç™»å½•</i></a></li>
+			</ul>
+		</li>
+	</ul>
 	<div class="navbar-default sidebar">
 	<div class="sidebar-nav navbar-collapse" id="sidebar">
 	<ul class="nav" id="side-menu">
 		<li class="active" >
 			<a href="/aixuexiao/manager/students">
 				<i class="icon-user"></i>
-				<span class="menu-text"> Ñ§ÉúÁĞ±í </span>
+				<span class="menu-text"> å­¦ç”Ÿåˆ—è¡¨ </span>
 			</a>
 		</li>
 		<li  >
 			<a href="/aixuexiao/manager/classes">
 				<i class="icon-list-alt"></i>
-				<span class="menu-text"> °à¼¶ÁĞ±í </span>
+				<span class="menu-text"> ç­çº§åˆ—è¡¨ </span>
 			</a>
 		</li>
 		<li  >
 			<a href="/aixuexiao/manager/exams">
 				<i class="icon-file"></i>
-				<span class="menu-text"> ¿¼ÊÔÁĞ±í </span>
+				<span class="menu-text"> è€ƒè¯•åˆ—è¡¨ </span>
 			</a>
 		</li>
 		<li >
 			<a href="#">
-				Î¢ĞÅÏûÏ¢
+				å¾®ä¿¡æ¶ˆæ¯
 				<b class="fa arrow"></b>
 			</a>
 			<ul class="nav nav-second-level collapse">
 				<li>
 					<a href="/aixuexiao/manager/messages">
 						<i class="icon-double-angle-right"></i>
-						½ÓÊÕÏûÏ¢
+						æ¥æ”¶æ¶ˆæ¯
 					</a>
 				</li>
 				<li  >
 					<a href="/aixuexiao/manager/replys">
 						<i class="icon-double-angle-right"></i>
-						»Ø¸´ÏûÏ¢
+						å›å¤æ¶ˆæ¯
 					</a>
 				</li>
 			</ul>
@@ -84,64 +97,11 @@
 	
 	<div id="page-wrapper" style="">
 		<div class="">
-			<div class="modal fade" id="studentModal" tabindex="-1" role="dialog" aria-labelledby="studentModalLabel" style="display: none;">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="studentModalLabel">Modal title</h4>
-					</div>
-					<div class="modal-body">
-						<form class="form-horizontal">
-							<div class="form-group">
-								<lable for="id_input" class="col-sm-2 control-label">Ñ§Éú±àºÅ</lable>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" name="" id="id_input">
-								</div>
-							</div>
-							<div class="form-group">
-								<lable for="name_input" class="col-sm-2 control-label">Ñ§ÉúĞÕÃû</lable>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" name="" id="name_input">
-								</div>
-							</div>
-							<div class="form-group ">
-								<lable for="classid_select" class="col-sm-2 control-label">ËùÊô°à¼¶</lable>
-								<div class="col-sm-10">
-									<select id="classid_select" class="form-control">
-										<option value="0">Ñ¡Ôñ°à¼¶</option>
-										
-										<option value="301">ÈıÄê¼¶Ò»°à</option>
-										
-										<option value="302">ÈıÄê¼¶¶ş°à</option>
-										
-									</select>
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<lable for="remark_input" class="col-sm-2 control-label">±¸×¢</lable>
-								<div class="col-sm-10">
-									<input type="text" name="" id="remark_input" class="form-control">
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">È¡Ïû</button>
-						<button type="button" class="btn btn-primary" id="btn_save">±£´æ</button>
-					</div>
-				</div>
-			</div>
-		</div>
 			<div class="page-content">
 				<div class="row">
 					<div class="col-lg-12">
 						<h1>
-							<i class="fa fa-users"></i> Ñ§ÉúĞÅÏ¢
+							<i class="fa fa-users"></i> å­¦ç”Ÿä¿¡æ¯
 						</h1>
 					</div>
 				</div>
@@ -149,37 +109,37 @@
 					<div class="span12">
 						<form class="form-inline" method="get" action="/aixuexiao/manager/students" style="margin-bottom:10px">
 							<input type="hidden" name="pagenum" value="">
-							&nbsp;&nbsp;ĞÕÃû£º<input type="text" id="name"
+							&nbsp;&nbsp;å§“åï¼š<input type="text" id="name"
 								value="" class="search-query form-control">&nbsp;&nbsp;&nbsp;&nbsp;
 							<select id="classid" class="form-control">
-								<option value="0">Ñ¡Ôñ°à¼¶</option>
+								<option value="0">é€‰æ‹©ç­çº§</option>
 								
 									<option
 										
-										value="301">ÈıÄê¼¶Ò»°à</option>
+										value="301">ä¸‰å¹´çº§ä¸€ç­</option>
 								
 									<option
 										
-										value="302">ÈıÄê¼¶¶ş°à</option>
+										value="302">ä¸‰å¹´çº§äºŒç­</option>
 								
 							</select>&nbsp;&nbsp;
 							<button id="btn_search" type="button" class="btn btn-purple btn-small">
-								²éÕÒ <i class="fa fa-search"></i>
+								æŸ¥æ‰¾ <i class="fa fa-search"></i>
 							</button>
-							<button id="btn_undo" type="button" class="btn btn-primary btn-small">
-								ÖØÖÃ <i class="fa fa-undo"></i>
+							<button id="btn_undo" type="button" class="btn btn-info btn-small">
+								é‡ç½® <i class="fa fa-undo"></i>
 							</button>
-							<button id="btn_refresh" type="button" class="btn btn-primary btn-small">
-								Ë¢ĞÂ <i class="fa fa-refresh"></i>
+							<button id="btn_refresh" type="button" class="btn btn-info btn-small">
+								åˆ·æ–° <i class="fa fa-refresh"></i>
 							</button>
-							<button id="btn_plus" type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#studentModal" data-title="Ìí¼ÓÑ§Éú" data-type="add" data-url="/aixuexiao/manager/students/add">
-								Ìí¼Ó <i class="fa fa-plus"></i>
+							<button id="btn_plus" type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#studentModal" data-title="æ·»åŠ å­¦ç”Ÿ" data-type="add" data-url="/aixuexiao/manager/students/add">
+								æ·»åŠ  <i class="fa fa-plus"></i>
 							</button>
-							<button id="btn_edit" type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#studentModal" data-title="¸üĞÂÑ§Éú" data-type="update" data-url="/aixuexiao/manager/students/update">
-								¸üĞÂ<i class="fa fa-edit"></i>
+							<button id="btn_edit" type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#studentModal" data-title="æ›´æ–°å­¦ç”Ÿ" data-type="update" data-url="/aixuexiao/manager/students/update">
+								æ›´æ–°<i class="fa fa-edit"></i>
 							</button>
-							<button id="btn_delete" type="button" class="btn btn-primary btn-small" data-type="delete" data-url="/aixuexiao/manager/students/delete">
-								É¾³ı<i class="fa fa-trash"></i>
+							<button id="btn_delete" type="button" class="btn btn-danger btn-small" data-type="delete" data-url="/aixuexiao/manager/students/delete">
+								åˆ é™¤<i class="fa fa-trash"></i>
 							</button>
 						</form>
 					</div>
@@ -190,11 +150,11 @@
 					<table id="table_id" class="table table-striped table-bordered dataTable hover">
 						<thead>
 							<tr>
-								<th>Ñ§Éú±àºÅ</th>
-								<th>Ñ§ÉúĞÕÃû</th>
-								<th>ËùÊô°à¼¶</th>
-								<th>±¸×¢</th>
-								<th>²Ù×÷</th>
+								<th>å­¦ç”Ÿç¼–å·</th>
+								<th>å­¦ç”Ÿå§“å</th>
+								<th>æ‰€å±ç­çº§</th>
+								<th>å¤‡æ³¨</th>
+								<th>æ“ä½œ</th>
 							</tr>
 						</thead>
 					</table>
@@ -255,7 +215,7 @@
 									$(btn).attr({
 										onclick:"location.href='/aixuexiao/manager/leavemessage?studentid="+data + "'"
 									});
-									$(btn).append("Î¢ÁôÑÔ");
+									$(btn).append("å¾®ç•™è¨€");
 									
 									var btn1=$('<button/>').addClass("btn btn-primary btn-mini");	
 									var i1=$('<i/>').addClass("icon-file");
@@ -264,7 +224,7 @@
 									$(btn1).attr({
 										onclick:"location.href='/aixuexiao/manager/examdetail?studentid="+ data + "'"
 														});
-										$(btn1).append("¿¼ÊÔÇé¿ö");
+										$(btn1).append("è€ƒè¯•æƒ…å†µ");
 
 										$(tmp).append(btn);
 										$(tmp).append(btn1);
