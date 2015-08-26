@@ -1,23 +1,31 @@
 package lky.entity;
 
+import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date;
 
 public class User implements Serializable {
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -34,8 +42,11 @@ public class User implements Serializable {
 		this.locked = locked;
 	}
 	private Long id;
+	@NotNull  @Length(min = 3)
 	private String username;
+	@NotNull
 	private String password;
+	private Date birthday;
 	private String salt;
 	private Boolean locked = Boolean.FALSE;
 	public User(){}
@@ -57,5 +68,13 @@ public class User implements Serializable {
 		return true;
 		
 		
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 }

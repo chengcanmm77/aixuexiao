@@ -17,17 +17,13 @@ import com.aixuexiao.dao.BaseDao;
 public class UserDaoImpl extends BaseDao implements UserDao {
 
 	@Override
-	//@Transactional(propagation=Propagation.REQUIRES_NEW)
-	//@Transactional
 	public void createUser(User user) {
 		this.writerSqlSession.insert("lky.dao.Impl.createUser",user);
 	}
+
 	@Override
-	//@Transactional(propagation=Propagation.REQUIRES_NEW)
-	//@Transactional
 	public void updateUser(User user) {
 		this.writerSqlSession.insert("lky.dao.Impl.updateUser",user);
-		throw new UnsupportedOperationException("回滚");
 	}
 
 	@Override

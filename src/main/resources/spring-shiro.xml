@@ -96,6 +96,7 @@
 			<value>
 				/assets/**=anon
 				/unauthorized=anon
+				/register=anon
 				/login=authc
 				/logout=logout
 				/weixin=roles[admin]

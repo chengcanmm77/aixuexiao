@@ -1,0 +1,5 @@
+<link href="<%=request.getContextPath()%>/assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/assets/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/assets/bower_components/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css" rel="stylesheet" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/bower_components/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/bower_components/metisMenu/dist/metisMenu.min.css">

@@ -4,8 +4,8 @@
 <mapper namespace="lky.dao.Impl">
     
 	<insert id="createUser" parameterType="lky.entity.User">
-		insert into sys_users (username,password,salt,locked)
-		 values(#{username},#{password},#{salt},#{locked});
+		insert into sys_users (username,password,salt,locked,birthday)
+		 values(#{username},#{password},#{salt},#{locked},#{birthday});
 	</insert>
 	
 	<delete id="deleteUser"  parameterType="long" >
